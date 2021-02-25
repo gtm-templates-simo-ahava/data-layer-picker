@@ -12,7 +12,9 @@ ___INFO___
   "type": "MACRO",
   "id": "cvt_temp_public_id",
   "version": 1,
-  "categories": ["UTILITY"],
+  "categories": [
+    "UTILITY"
+  ],
   "__wm": "VGVtcGxhdGUtQXV0aG9yX0RhdGFMYXllclBpY2tlci1TaW1vLUFoYXZh",
   "securityGroups": [],
   "displayName": "Data Layer Picker",
@@ -42,14 +44,15 @@ ___TEMPLATE_PARAMETERS___
           {
             "type": "TEXT",
             "name": "keyName",
-            "displayName": "",
+            "displayName": "Property name",
             "simpleValueType": true
           }
         ],
         "help": ""
       }
     ],
-    "simpleValueType": true
+    "simpleValueType": true,
+    "help": "If you choose \"Entire object\", the whole object that was pushed into dataLayer will be returned. If you choose \"Specific property\", you can then provide the key (using dot notation if necessary) whose value you want to pull from the pushed dataLayer object."
   }
 ]
 
