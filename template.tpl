@@ -82,6 +82,9 @@ const get = (obj, path, def) => {
 if (dataLayer && gtmId) {
   // Get object from dataLayer that matches the gtm.uniqueEventId
   let obj = dataLayer.map(o => {
+    //add additional check for values not supported by copyFromWindow
+    if (!o) return {};
+    
     // If a regular dataLayer object, return it
     if (o['gtm.uniqueEventId']) return o;
     // Other wise assume it's a template constructor-based object
