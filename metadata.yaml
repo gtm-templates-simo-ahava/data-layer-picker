@@ -1,5 +1,8 @@
 homepage: "https://www.simoahava.com/"
 versions:
   # Latest version
+  - sha: dd7d328be45cd99058203b494ddc99be57dc81f2
+    changeNotes: Fix issue with undefined objects breaking the variable.
+  # Older versions
   - sha: 1a39c985556fc837d4a3b9d9f1960b69382410a4
     changeNotes: Initial release.
