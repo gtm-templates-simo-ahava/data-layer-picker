@@ -82,19 +82,22 @@ const get = (obj, path, def) => {
 if (dataLayer && gtmId) {
   // Get object from dataLayer that matches the gtm.uniqueEventId
   let obj = dataLayer.map(o => {
+    // If falsy (due to e.g. sandbox API suppressing the object), return empty object
+    if (!o) return {};
+    
     // If a regular dataLayer object, return it
     if (o['gtm.uniqueEventId']) return o;
-    // Other wise assume it's a template constructor-based object
+
+    // Otherwise assume it's a template constructor-based object
     // Clone the object to remove constructor, then return first
-    // property in the object (the wrapper).
+    // property in the object (the wrapper)
     o = JSON.parse(JSON.stringify(o));
     for (let prop in o) {
       return o[prop];
     }
-  }).filter(o => {
-    // Filter to only include the item(s) where the event ID matches
-    if (o['gtm.uniqueEventId'] === gtmId) return true;
-  });
+  // Filter to only include the item(s) where the event ID matches
+  }).filter(o => o['gtm.uniqueEventId'] === gtmId);
+  
   // Get the first item from the matches
   obj = obj.length ? obj[0] : {};
   switch (data.option) {
@@ -291,7 +294,7 @@ setup: |-
     option: 'object'
   };
 
-  const dataLayer = [{
+  const dataLayer = [undefined, {
     'gtm.uniqueEventId': 1,
     firstItem: {
       test: 'yes'
