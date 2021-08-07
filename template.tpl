@@ -96,7 +96,7 @@ if (dataLayer && gtmId) {
       return o[prop];
     }
   // Filter to only include the item(s) where the event ID matches
-  }).filter(o => o['gtm.uniqueEventId'] === gtmId);
+  }).filter(o => !!o && o['gtm.uniqueEventId'] === gtmId);
   
   // Get the first item from the matches
   obj = obj.length ? obj[0] : {};
