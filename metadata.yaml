@@ -1,6 +1,8 @@
 homepage: "https://www.simoahava.com/"
 versions:
   # Latest version
+  - sha: e6d6b5661a63fd3001c0814e3f1ead6f97c79041
+    changeNotes: Fix to work with false values.
   - sha: aa1e2ddf16f5af2fde13dc9cc82666d8fb45ce8f
     changeNotes: Fix issue with undefined keys breaking the variable.
   # Older versions
