@@ -73,7 +73,7 @@ const get = (obj, path, def) => {
   let current = obj;
   
   for (let i = 0; i < path.length; i++) {
-    if (!current[path[i]]) return def;
+    if (typeof current[path[i]] === 'undefined') return def;
     current = current[path[i]];
   }
   return current;
@@ -289,6 +289,24 @@ scenarios:
 
     // Verify that the variable returns a result.
     assertThat(variableResult).isEqualTo('no');
+- name: Fetches false value successfully
+  code: |-
+    mockData.option = 'key';
+    mockData.keyName = 'secondItem.test';
+
+    mock('copyFromDataLayer', key => {
+      return 3;
+    });
+
+    mock('copyFromWindow', key => {
+      return dataLayer;
+    });
+
+    // Call runCode to run the template's code.
+    const variableResult = runCode(mockData);
+
+    // Verify that the variable returns a result.
+    assertThat(variableResult).isEqualTo(false);
 setup: |-
   const mockData = {
     option: 'object'
@@ -304,6 +322,13 @@ setup: |-
       'gtm.uniqueEventId': 2,
       secondItem: {
         test: 'no'
+      }
+    }
+  },{
+    b: {
+      'gtm.uniqueEventId': 3,
+      secondItem: {
+        test: false
       }
     }
   }];
